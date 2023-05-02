@@ -5,7 +5,7 @@ import { AuthContext } from "../../../AuthProvider/AuthProvider";
 const Registration = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const [ErrorMessage, setErrorMessage] = useState("");
-  const { EmailRegister } = useContext(AuthContext);
+  const { EmailRegister, profileUpdate } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -16,16 +16,33 @@ const Registration = () => {
     const target = event.target;
     const emailValue = target.email.value;
     const passwordValue = target.password.value;
+    const displayName = target.name.value;
+    const photoURL = target.photo.value;
 
     EmailRegister(emailValue, passwordValue)
-      .then((user) => {
-        console.log(user);
+      .then((result) => {
+        console.log(result.user);
         setSuccessMessage("Registration successfully !!!");
         setErrorMessage("");
         navigate(from, { replace: true });
         target.reset();
+        updateUserData(result.user, displayName, photoURL);
       })
       .catch((error) => {
+        const errorMessage = error.message;
+        setErrorMessage(errorMessage);
+        setSuccessMessage("");
+      });
+  };
+
+  const updateUserData = (user, name, photo) => {
+    profileUpdate(user, name, photo)
+      .then(() => {
+        setSuccessMessage("Profile Updated!!!");
+        setErrorMessage("");
+      })
+      .catch((error) => {
+        console.log(error);
         const errorMessage = error.message;
         setErrorMessage(errorMessage);
         setSuccessMessage("");

@@ -56,7 +56,7 @@ const Login = () => {
         </div>
         <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
           <form onSubmit={handleLogin}>
-            <div className="px-8 pt-8">
+            <div className="px-8 py-8">
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>
@@ -97,13 +97,25 @@ const Login = () => {
               )}
               <div className="form-control">
                 <button className="btn">Login</button>
-                <div className="divider text-blue-600">OR</div>
               </div>
             </div>
           </form>
-          <button onClick={handleGoogleLogin} className="btn bg-slate-500">
-            Google Login
-          </button>
+        </div>
+        <h1 className="pt-10 pb-2 text-3xl font-bold">Or Sign Up Using</h1>
+        <div className="md:flex md:w-2/4 mx-auto md:pb-10 pb-1">
+          <div className="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center mt-5 md:mt-0">
+            <button onClick={handleGoogleLogin} className="btn bg-slate-500">
+              Google Login
+            </button>
+          </div>
+          <div className="divider md:divider-horizontal divider-vertical">
+            OR
+          </div>
+          <div className="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center">
+            <button onClick={handleGoogleLogin} className="btn bg-slate-500">
+              Google Login
+            </button>
+          </div>
         </div>
       </div>
     </div>
