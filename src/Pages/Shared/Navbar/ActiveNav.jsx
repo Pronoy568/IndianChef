@@ -6,7 +6,7 @@ const ActiveNav = ({ children, to }) => {
     <NavLink
       to={to}
       className={({ isActive }) =>
-        isActive ? "bg-gray-600 rounded-xl text-white" : ""
+        isActive ? "bg-gray-600 rounded-xl text-white" : "rounded-xl"
       }
     >
       {children}

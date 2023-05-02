@@ -7,6 +7,7 @@ import Error from "../Pages/Error/Error";
 import ChefNav from "../Pages/ChefNav/ChefNav";
 import Login from "../Pages/Authentication/Login/Login";
 import Blog from "../Pages/Blog/Blog";
+import Registration from "../Pages/Authentication/Registration/Registration";
 
 const Route = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const Route = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
+      },
+      {
+        path: "/registration",
+        element: <Registration />,
       },
       {
         path: "/blog",

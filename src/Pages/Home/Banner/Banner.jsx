@@ -9,7 +9,7 @@ const Banner = () => {
           Welcome to the Indian
           <br /> <span className="text-sky-500">Best Chef Recipe</span>
         </h1>
-        <button className="btn btn-active btn-primary mt-4">
+        <button className="btn mt-4">
           <a href="#chef">Explore</a>
         </button>
       </div>

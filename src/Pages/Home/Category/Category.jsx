@@ -3,7 +3,7 @@ import React from "react";
 const Category = () => {
   return (
     <div className="w-9/12 mx-auto">
-      <h1 className="text-center text-4xl font-bold pt-5">Recipe Category</h1>
+      <h1 className="text-center text-5xl font-bold pt-5">Recipe Category</h1>
       <div className="grid md:grid-cols-6 grid-cols-2 gap-8 py-12">
         <div>
           <img

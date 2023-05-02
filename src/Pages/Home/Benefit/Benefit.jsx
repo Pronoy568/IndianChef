@@ -4,7 +4,7 @@ import image from "./../../../assets/image1.jpg";
 const Benefit = () => {
   return (
     <section>
-      <h1 className="text-center text-4xl font-bold pt-10 pb-2">
+      <h1 className="text-center text-5xl font-bold pt-10 pb-2">
         Benefits of Chef Cook
       </h1>
       <p className="text-center pb-5">

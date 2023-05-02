@@ -3,7 +3,7 @@ import React from "react";
 const News = () => {
   return (
     <section className="w-10/12 mx-auto">
-      <h1 className="text-center text-4xl font-bold pt-5">Latest News</h1>
+      <h1 className="text-center text-5xl font-bold pt-5">Latest News</h1>
       <div className="py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
         <div className="card w-96 bg-base-200 hover:bg-base-100 shadow-md">
           <figure className="mt-5">

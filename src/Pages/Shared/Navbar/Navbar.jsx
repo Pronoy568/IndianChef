@@ -6,8 +6,10 @@ const Navbar = () => {
   return (
     <div>
       <div className="navbar bg-base-300 md:flex items-center justify-around py-4 block">
-        <img className="rounded-lg" src={logo} alt={logo} />
-        <ul className="menu menu-horizontal bg-base-300">
+        <div className="flex items-center justify-center">
+          <img className="rounded-lg" src={logo} alt={logo} />
+        </div>
+        <ul className="menu menu-horizontal bg-base-300 mt-5 md:mt-0">
           <li className="mx-3">
             <ActiveNav to="/">Home</ActiveNav>
           </li>
