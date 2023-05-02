@@ -1,15 +1,15 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../AuthProvider/AuthProvider";
 
 const Login = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const [ErrorMessage, setErrorMessage] = useState("");
   const { EmailLogin, GoogleLogin } = useContext(AuthContext);
-  // const navigate = useNavigate();
-  // const location = useLocation();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  // const from = location.state?.from?.pathname || "/courses";
+  const from = location.state?.from?.pathname || "/";
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -22,7 +22,8 @@ const Login = () => {
         console.log(user);
         setErrorMessage("");
         setSuccessMessage("Login Successfully !!!");
-        // navigate(from, { replace: true });
+        target.reset();
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         console.log(error);
@@ -38,8 +39,7 @@ const Login = () => {
         console.log(result);
         setErrorMessage("");
         setSuccessMessage("Login Successfully !!!");
-        target.reset();
-        // navigate(from, { replace: true });
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         const errorMessage = error.message;

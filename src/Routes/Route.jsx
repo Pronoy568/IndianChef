@@ -8,6 +8,7 @@ import ChefNav from "../Pages/ChefNav/ChefNav";
 import Login from "../Pages/Authentication/Login/Login";
 import Blog from "../Pages/Blog/Blog";
 import Registration from "../Pages/Authentication/Registration/Registration";
+import PrivateRoute from "./PrivateRoute";
 
 const Route = createBrowserRouter([
   {
@@ -21,7 +22,11 @@ const Route = createBrowserRouter([
       },
       {
         path: "/chefRecipes/:id",
-        element: <ChefRecipeData />,
+        element: (
+          <PrivateRoute>
+            <ChefRecipeData />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/chef",

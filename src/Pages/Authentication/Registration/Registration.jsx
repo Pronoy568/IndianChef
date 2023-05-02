@@ -1,11 +1,15 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../AuthProvider/AuthProvider";
 
 const Registration = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const [ErrorMessage, setErrorMessage] = useState("");
   const { EmailRegister } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
 
   const handleRegister = (event) => {
     event.preventDefault();
@@ -18,6 +22,7 @@ const Registration = () => {
         console.log(user);
         setSuccessMessage("Registration successfully !!!");
         setErrorMessage("");
+        navigate(from, { replace: true });
         target.reset();
       })
       .catch((error) => {

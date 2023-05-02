@@ -9,7 +9,7 @@ const PrivateRoute = ({ children }) => {
 
   if (loading) {
     return (
-      <>
+      <div className="flex items-center justify-center">
         <BallTriangle
           height={100}
           width={100}
@@ -20,7 +20,7 @@ const PrivateRoute = ({ children }) => {
           wrapperStyle=""
           visible={true}
         />
-      </>
+      </div>
     );
   }
 
