@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import RecipeDisplay from "./RecipeDisplay";
 
 const ChefRecipeData = () => {
   const [RecipeData, setRecipeData] = useState([]);
@@ -59,9 +60,14 @@ const ChefRecipeData = () => {
       </div>
       <div>
         <h1 className="text-5xl font-bold pb-8 text-center">Recipe</h1>
-        {RecipeData.recipes.map((recipe) => (
-          <p>{recipe.name}</p>
-        ))}
+        <div className="w-10/12 mx-auto">
+          {RecipeData?.recipes?.map((recipe) => (
+            <RecipeDisplay
+              key={recipe.recipeId}
+              recipe={recipe}
+            ></RecipeDisplay>
+          ))}
+        </div>
       </div>
     </section>
   );
