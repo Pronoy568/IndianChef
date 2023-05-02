@@ -1,5 +1,6 @@
 import React from "react";
 import logo from "../../../assets/logo.png";
+import ActiveNav from "./ActiveNav";
 
 const Navbar = () => {
   return (
@@ -8,16 +9,16 @@ const Navbar = () => {
         <img className="rounded-lg" src={logo} alt={logo} />
         <ul className="menu menu-horizontal bg-base-300">
           <li className="mx-3">
-            <a>Home</a>
+            <ActiveNav to="/">Home</ActiveNav>
           </li>
           <li className="mx-3">
-            <a>Chef</a>
+            <ActiveNav to="/chef">Chef</ActiveNav>
           </li>
           <li className="mx-3">
-            <a>Blog</a>
+            <ActiveNav to="/blog">Blog</ActiveNav>
           </li>
           <li className="mx-3">
-            <a>Login</a>
+            <ActiveNav to="/login">Login</ActiveNav>
           </li>
         </ul>
       </div>
