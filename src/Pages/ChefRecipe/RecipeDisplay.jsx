@@ -1,9 +1,5 @@
 import React from "react";
 
-<<<<<<< HEAD
-const RecipeDisplay = () => {
-  return <div></div>;
-=======
 const RecipeDisplay = ({ recipe }) => {
   const { cookingMethod, description, ingredient, name, rating, recipesImage } =
     recipe;
@@ -47,7 +43,6 @@ const RecipeDisplay = ({ recipe }) => {
       </div>
     </div>
   );
->>>>>>> c007fe46900381ff3d3f6eae35bb27e344fdc3a6
 };
 
 export default RecipeDisplay;
