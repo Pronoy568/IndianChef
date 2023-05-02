@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../AuthProvider/AuthProvider";
 
 const Login = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const [ErrorMessage, setErrorMessage] = useState("");
-  // const { EmailLogin, GoogleLogin } = useContext(AuthContext);
+  const { EmailLogin, GoogleLogin } = useContext(AuthContext);
   // const navigate = useNavigate();
   // const location = useLocation();
 
@@ -15,37 +16,37 @@ const Login = () => {
     const target = event.target;
     const emailValue = target.email.value;
     const passwordValue = target.password.value;
-    console.log(emailValue, passwordValue);
 
-    // EmailLogin(emailValue, passwordValue)
-    //   .then((user) => {
-    //     console.log(user);
-    //     setErrorMessage("");
-    //     setSuccessMessage("Login Successfully !!!");
-    //     // navigate(from, { replace: true });
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //     const errorMessage = error.message;
-    //     setErrorMessage(errorMessage);
-    //     setSuccessMessage("");
-    //   });
+    EmailLogin(emailValue, passwordValue)
+      .then((user) => {
+        console.log(user);
+        setErrorMessage("");
+        setSuccessMessage("Login Successfully !!!");
+        // navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        console.log(error);
+        const errorMessage = error.message;
+        setErrorMessage(errorMessage);
+        setSuccessMessage("");
+      });
   };
 
-  // const handleGoogleLogin = () => {
-  //   GoogleLogin()
-  //     .then((result) => {
-  //       console.log(result);
-  //       setErrorMessage("");
-  //       setSuccessMessage("Login Successfully !!!");
-  //       navigate(from, { replace: true });
-  //     })
-  //     .catch((error) => {
-  //       const errorMessage = error.message;
-  //       setErrorMessage(errorMessage);
-  //       setSuccessMessage("");
-  //     });
-  // };
+  const handleGoogleLogin = () => {
+    GoogleLogin()
+      .then((result) => {
+        console.log(result);
+        setErrorMessage("");
+        setSuccessMessage("Login Successfully !!!");
+        target.reset();
+        // navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        setErrorMessage(errorMessage);
+        setSuccessMessage("");
+      });
+  };
 
   return (
     <div className="bg-base-200">
@@ -62,7 +63,7 @@ const Login = () => {
                 </label>
                 <input
                   type="email"
-                  placeholder="email"
+                  placeholder="Enter email"
                   className="input input-bordered"
                   name="email"
                   required
@@ -74,7 +75,7 @@ const Login = () => {
                 </label>
                 <input
                   type="password"
-                  placeholder="password"
+                  placeholder="Enter Password"
                   className="input input-bordered"
                   name="password"
                   required
@@ -100,7 +101,9 @@ const Login = () => {
               </div>
             </div>
           </form>
-          <button className="btn bg-slate-500">Google Login</button>
+          <button onClick={handleGoogleLogin} className="btn bg-slate-500">
+            Google Login
+          </button>
         </div>
       </div>
     </div>
