@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const RecipeDisplay = ({ recipe }) => {
   const {
@@ -12,6 +14,13 @@ const RecipeDisplay = ({ recipe }) => {
     recipesImage,
     recipeId,
   } = recipe;
+  const [toastShow, setToastShow] = useState(false);
+
+  const toastHandle = () => {
+    toast(`${name} is your favorite!`);
+    setToastShow(true);
+  };
+
   return (
     <div className="md:flex p-5 mb-5 rounded-lg border-2 border-gray-200 bg-gray-100">
       <img
@@ -65,7 +74,14 @@ const RecipeDisplay = ({ recipe }) => {
               </div>
             </div>
           </div>
-          <button className="btn mt-5 md:mt-0">Favorite Button</button>
+          <button
+            onClick={toastHandle}
+            className="btn mt-5 md:mt-0"
+            disabled={toastShow}
+          >
+            Favorite Button
+          </button>
+          <ToastContainer />
         </div>
       </div>
     </div>

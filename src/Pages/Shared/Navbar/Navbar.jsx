@@ -11,10 +11,10 @@ const Navbar = () => {
             <a>Home</a>
           </li>
           <li className="mx-3">
-            <a>Blog</a>
+            <a>Chef</a>
           </li>
           <li className="mx-3">
-            <a>Contact</a>
+            <a>Blog</a>
           </li>
           <li className="mx-3">
             <a>Login</a>

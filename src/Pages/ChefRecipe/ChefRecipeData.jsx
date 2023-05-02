@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import RecipeDisplay from "./RecipeDisplay";
 
 const ChefRecipeData = () => {
@@ -12,7 +12,6 @@ const ChefRecipeData = () => {
       .then((data) => {
         const SelectedRecipe = data.find((selected) => selected.id === id.id);
         setRecipeData(SelectedRecipe);
-        console.log(SelectedRecipe);
       });
   }, []);
 
@@ -68,6 +67,11 @@ const ChefRecipeData = () => {
             ></RecipeDisplay>
           ))}
         </div>
+      </div>
+      <div className="text-center py-8">
+        <button className="btn btn-active btn-ghost">
+          <Link to="/">Go to Home</Link>
+        </button>
       </div>
     </section>
   );
