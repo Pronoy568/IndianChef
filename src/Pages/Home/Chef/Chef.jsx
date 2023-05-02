@@ -12,7 +12,7 @@ const Chef = () => {
   }, []);
 
   return (
-    <div className="text-center w-10/12 mx-auto  py-12">
+    <div className="text-center w-10/12 mx-auto  py-12" id="chef">
       <h1 className="text-5xl font-bold pb-8">Chef Information</h1>
       <div className="grid md:grid-cols-3 grid-cols-1 gap-8">
         {chefData.map((chef) => (
