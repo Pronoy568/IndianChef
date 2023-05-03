@@ -1,4 +1,5 @@
 import React from "react";
+import LazyLoad from "react-lazy-load";
 import { Link } from "react-router-dom";
 
 const ChefDisplay = (props) => {
@@ -10,7 +11,9 @@ const ChefDisplay = (props) => {
       <div className="card w-96 bg-base-100 hover:bg-slate-200 shadow-xl pt-3">
         <div className="flex items-center justify-center">
           <figure>
-            <img className="rounded-lg" src={chefImage} alt={chefName} />
+            <LazyLoad offset={300} threshold={0.95}>
+              <img className="rounded-lg" src={chefImage} alt={chefName} />
+            </LazyLoad>
           </figure>
           <div className="px-4 text-justify">
             <h1 className="card-title text-xl font-bold">{chefName}</h1>

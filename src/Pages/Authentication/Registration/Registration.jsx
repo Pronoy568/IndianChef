@@ -1,6 +1,8 @@
 import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../AuthProvider/AuthProvider";
+import { getAuth, updateProfile } from "firebase/auth";
+const auth = getAuth();
 
 const Registration = () => {
   const [successMessage, setSuccessMessage] = useState("");
@@ -22,11 +24,27 @@ const Registration = () => {
     EmailRegister(emailValue, passwordValue)
       .then((result) => {
         console.log(result.user);
-        setSuccessMessage("Registration successfully !!!");
+        (result.displayName = displayName),
+          (result.photoURL = photoURL),
+          setSuccessMessage("Registration successfully !!!");
         setErrorMessage("");
         navigate(from, { replace: true });
         target.reset();
-        updateUserData(result.user, displayName, photoURL);
+        // updateUserData(result.user, displayName, photoURL);
+        updateProfile(result.user, {
+          displayName: displayName,
+          photoURL: photoURL,
+        })
+          .then(() => {
+            setSuccessMessage("Profile Updated!!!");
+            setErrorMessage("");
+          })
+          .catch((error) => {
+            console.log(error);
+            const errorMessage = error.message;
+            setErrorMessage(errorMessage);
+            setSuccessMessage("");
+          });
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -35,19 +53,34 @@ const Registration = () => {
       });
   };
 
-  const updateUserData = (user, name, photo) => {
-    profileUpdate(user, name, photo)
-      .then(() => {
-        setSuccessMessage("Profile Updated!!!");
-        setErrorMessage("");
-      })
-      .catch((error) => {
-        console.log(error);
-        const errorMessage = error.message;
-        setErrorMessage(errorMessage);
-        setSuccessMessage("");
-      });
-  };
+  // const updateUserData = (user, name, photo) => {
+  //   profileUpdate(user, name, photo)
+  //     .then(() => {
+  //       setSuccessMessage("Profile Updated!!!");
+  //       setErrorMessage("");
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       const errorMessage = error.message;
+  //       setErrorMessage(errorMessage);
+  //       setSuccessMessage("");
+  //     });
+  // };
+
+  // const updateUserData = (user, name, photo) => {
+  //   updateProfile(auth.currentUser, {
+  //     displayName: "Jane Q. User",
+  //     photoURL: "https://example.com/jane-q-user/profile.jpg",
+  //   })
+  //     .then(() => {
+  //       // Profile updated!
+  //       // ...
+  //     })
+  //     .catch((error) => {
+  //       // An error occurred
+  //       // ...
+  //     });
+  // };
 
   return (
     <div className="bg-base-200">
@@ -98,7 +131,13 @@ const Registration = () => {
                 <label className="label">
                   <span className="label-text">Photo URL</span>
                 </label>
-                <input type="file" name="photo" required />
+                <input
+                  type="text"
+                  placeholder="Enter Your Photo URL"
+                  className="input input-bordered"
+                  name="photo"
+                  required
+                />
                 <label className="label">
                   <Link
                     to="/login"
