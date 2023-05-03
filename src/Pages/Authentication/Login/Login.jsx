@@ -1,15 +1,21 @@
 import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../AuthProvider/AuthProvider";
+import { Github, EyeOff, Eye } from "lucide-react";
 
 const Login = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const [ErrorMessage, setErrorMessage] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const { EmailLogin, GoogleLogin, GithubLogin } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
 
   const from = location.state?.from?.pathname || "/";
+
+  const handleTogglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -84,17 +90,35 @@ const Login = () => {
                   required
                 />
               </div>
-              <div className="form-control">
+              <div className="form-control relative ">
                 <label className="label">
                   <span className="label-text">Password</span>
                 </label>
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   placeholder="Enter Password"
                   className="input input-bordered"
                   name="password"
                   required
                 />
+                <p
+                  className="absolute top-12 right-3 bg-slate-200 p-1 rounded-2xl"
+                  onClick={handleTogglePasswordVisibility}
+                >
+                  {showPassword ? (
+                    <div>
+                      <span>
+                        <EyeOff color="black" size={20} />
+                      </span>
+                    </div>
+                  ) : (
+                    <div>
+                      <span>
+                        <Eye color="black" size={20} />
+                      </span>
+                    </div>
+                  )}
+                </p>
                 <label className="label">
                   <Link
                     to="/registration"
@@ -120,6 +144,13 @@ const Login = () => {
         <div className="md:flex md:w-2/4 mx-auto md:pb-10 pb-1">
           <div className="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center mt-5 md:mt-0">
             <button onClick={handleGoogleLogin} className="btn bg-slate-500">
+              <span className="me-2">
+                <img
+                  className="w-12 rounded-full"
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqkyW8ueUFuOyzZwA2PxadlUAyNL0glIQxXA&usqp=CAU"
+                  alt="Google"
+                />
+              </span>
               Google Login
             </button>
           </div>
@@ -128,6 +159,9 @@ const Login = () => {
           </div>
           <div className="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center">
             <button onClick={handleGithubLogin} className="btn bg-slate-500">
+              <span className="me-2">
+                <Github color="black" size={20} />
+              </span>
               Github Login
             </button>
           </div>

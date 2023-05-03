@@ -1,10 +1,12 @@
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../AuthProvider/AuthProvider";
+import { EyeOff, Eye } from "lucide-react";
 
 const Registration = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const [ErrorMessage, setErrorMessage] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const { EmailRegister, profileUpdate, LogOut } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -49,6 +51,10 @@ const Registration = () => {
       });
   };
 
+  const handleTogglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <div className="bg-base-200">
       <div className="flex flex-col items-center justify-center py-10">
@@ -87,12 +93,30 @@ const Registration = () => {
                   <span className="label-text">Password</span>
                 </label>
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   placeholder="Enter Password"
                   className="input input-bordered"
                   name="password"
                   required
                 />
+                <p
+                  className="absolute bottom-56 right-10 bg-slate-200 p-1 rounded-2xl"
+                  onClick={handleTogglePasswordVisibility}
+                >
+                  {showPassword ? (
+                    <div>
+                      <span>
+                        <EyeOff color="black" size={20} />
+                      </span>
+                    </div>
+                  ) : (
+                    <div>
+                      <span>
+                        <Eye color="black" size={20} />
+                      </span>
+                    </div>
+                  )}
+                </p>
               </div>
               <div className="form-control">
                 <label className="label">

@@ -7,7 +7,7 @@ const ChefRecipeData = () => {
   const id = useParams();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/chefRecipe`)
+    fetch(`https://indian-best-chef-server.vercel.app/chefRecipe`)
       .then((res) => res.json())
       .then((data) => {
         const SelectedRecipe = data.find((selected) => selected.id === id.id);

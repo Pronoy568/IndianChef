@@ -6,7 +6,7 @@ const Chef = () => {
   const [chefData, setChefData] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/chefRecipe`)
+    fetch(`https://indian-best-chef-server.vercel.app/chefRecipe`)
       .then((res) => res.json())
       .then((data) => setChefData(data));
   }, []);
