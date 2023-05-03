@@ -10,10 +10,12 @@ import {
   updateProfile,
 } from "firebase/auth";
 import app from "../Firebase/firebase.config";
+import { GithubAuthProvider } from "firebase/auth";
 
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
 const GoogleProvider = new GoogleAuthProvider();
+const GithubProvider = new GithubAuthProvider();
 
 const AuthProvider = ({ children }) => {
   const [userLogin, setUserLogin] = useState("");
@@ -36,6 +38,11 @@ const AuthProvider = ({ children }) => {
 
   const LogOut = () => {
     return signOut(auth);
+  };
+
+  const GithubLogin = () => {
+    setLoading(true);
+    return signInWithPopup(auth, GithubProvider);
   };
 
   const profileUpdate = (updatedUser, displayProfileName, displayPhotoURL) => {
@@ -61,6 +68,7 @@ const AuthProvider = ({ children }) => {
     LogOut,
     loading,
     profileUpdate,
+    GithubLogin,
   };
 
   return (

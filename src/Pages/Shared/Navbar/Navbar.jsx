@@ -6,7 +6,6 @@ import person from "./../../../assets/person.png";
 
 const Navbar = () => {
   const { userLogin, LogOut } = useContext(AuthContext);
-  console.log(userLogin?.photoURL);
   return (
     <div>
       <div className="navbar bg-base-300 md:flex items-center justify-around py-4 block">
@@ -41,15 +40,7 @@ const Navbar = () => {
                     style={{ borderRadius: "50%" }}
                     className="w-16"
                     src={
-                      userLogin?.photoURL === null ? person : userLogin.photoURL
-                    }
-                    alt={userLogin.email}
-                  />
-                  <img
-                    style={{ borderRadius: "50%" }}
-                    className="w-16"
-                    src={
-                      userLogin?.photoURL === undefined
+                      userLogin?.photoURL === null || undefined
                         ? person
                         : userLogin.photoURL
                     }

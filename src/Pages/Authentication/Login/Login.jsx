@@ -5,7 +5,7 @@ import { AuthContext } from "../../../AuthProvider/AuthProvider";
 const Login = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const [ErrorMessage, setErrorMessage] = useState("");
-  const { EmailLogin, GoogleLogin } = useContext(AuthContext);
+  const { EmailLogin, GoogleLogin, GithubLogin } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -37,6 +37,21 @@ const Login = () => {
     GoogleLogin()
       .then((result) => {
         console.log(result);
+        setErrorMessage("");
+        setSuccessMessage("Login Successfully !!!");
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        setErrorMessage(errorMessage);
+        setSuccessMessage("");
+      });
+  };
+
+  const handleGithubLogin = () => {
+    GithubLogin()
+      .then((result) => {
+        console.log(result.user);
         setErrorMessage("");
         setSuccessMessage("Login Successfully !!!");
         navigate(from, { replace: true });
@@ -112,8 +127,8 @@ const Login = () => {
             OR
           </div>
           <div className="grid h-20 flex-grow card bg-base-300 rounded-box place-items-center">
-            <button onClick={handleGoogleLogin} className="btn bg-slate-500">
-              Google Login
+            <button onClick={handleGithubLogin} className="btn bg-slate-500">
+              Github Login
             </button>
           </div>
         </div>
