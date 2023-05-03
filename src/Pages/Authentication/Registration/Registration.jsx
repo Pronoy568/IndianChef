@@ -1,17 +1,14 @@
 import React, { useContext, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../AuthProvider/AuthProvider";
-import { getAuth, updateProfile } from "firebase/auth";
-const auth = getAuth();
 
 const Registration = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const [ErrorMessage, setErrorMessage] = useState("");
-  const { EmailRegister, profileUpdate } = useContext(AuthContext);
+  const { EmailRegister, profileUpdate, LogOut } = useContext(AuthContext);
   const navigate = useNavigate();
-  const location = useLocation();
 
-  const from = location.state?.from?.pathname || "/";
+  const from = "/login";
 
   const handleRegister = (event) => {
     event.preventDefault();
@@ -24,27 +21,12 @@ const Registration = () => {
     EmailRegister(emailValue, passwordValue)
       .then((result) => {
         console.log(result.user);
-        (result.displayName = displayName),
-          (result.photoURL = photoURL),
-          setSuccessMessage("Registration successfully !!!");
+        setSuccessMessage("Registration successfully !!!");
         setErrorMessage("");
         navigate(from, { replace: true });
         target.reset();
-        // updateUserData(result.user, displayName, photoURL);
-        updateProfile(result.user, {
-          displayName: displayName,
-          photoURL: photoURL,
-        })
-          .then(() => {
-            setSuccessMessage("Profile Updated!!!");
-            setErrorMessage("");
-          })
-          .catch((error) => {
-            console.log(error);
-            const errorMessage = error.message;
-            setErrorMessage(errorMessage);
-            setSuccessMessage("");
-          });
+        LogOut();
+        updateUserData(result.user, displayName, photoURL);
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -53,34 +35,19 @@ const Registration = () => {
       });
   };
 
-  // const updateUserData = (user, name, photo) => {
-  //   profileUpdate(user, name, photo)
-  //     .then(() => {
-  //       setSuccessMessage("Profile Updated!!!");
-  //       setErrorMessage("");
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //       const errorMessage = error.message;
-  //       setErrorMessage(errorMessage);
-  //       setSuccessMessage("");
-  //     });
-  // };
-
-  // const updateUserData = (user, name, photo) => {
-  //   updateProfile(auth.currentUser, {
-  //     displayName: "Jane Q. User",
-  //     photoURL: "https://example.com/jane-q-user/profile.jpg",
-  //   })
-  //     .then(() => {
-  //       // Profile updated!
-  //       // ...
-  //     })
-  //     .catch((error) => {
-  //       // An error occurred
-  //       // ...
-  //     });
-  // };
+  const updateUserData = (user, name, photo) => {
+    profileUpdate(user, name, photo)
+      .then(() => {
+        setSuccessMessage("Profile Updated!!!");
+        setErrorMessage("");
+      })
+      .catch((error) => {
+        console.log(error);
+        const errorMessage = error.message;
+        setErrorMessage(errorMessage);
+        setSuccessMessage("");
+      });
+  };
 
   return (
     <div className="bg-base-200">

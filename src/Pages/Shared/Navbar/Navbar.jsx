@@ -13,13 +13,13 @@ const Navbar = () => {
           <img className="rounded-lg" src={logo} alt={logo} />
         </div>
         <ul className="menu menu-horizontal bg-base-300 mt-5 md:mt-0 md:text-xl">
-          <li className="mx-3">
+          <li className="md:mx-3 mx-1">
             <ActiveNav to="/">Home</ActiveNav>
           </li>
-          <li className="mx-3">
+          <li className="md:mx-3 mx-1">
             <ActiveNav to="/chef">Chef</ActiveNav>
           </li>
-          <li className="mx-3">
+          <li className="md:mx-3 mx-1">
             <ActiveNav to="/blog">Blog</ActiveNav>
           </li>
           {userLogin ? (
@@ -51,8 +51,11 @@ const Navbar = () => {
             </>
           ) : (
             <>
-              <li className="mx-3">
+              <li className="md:mx-3 mx-1">
                 <ActiveNav to="/login">Login</ActiveNav>
+              </li>
+              <li className="md:mx-3 mx-1">
+                <ActiveNav to="/registration">Registration</ActiveNav>
               </li>
             </>
           )}

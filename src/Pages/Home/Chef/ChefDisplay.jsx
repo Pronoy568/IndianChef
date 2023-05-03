@@ -11,7 +11,7 @@ const ChefDisplay = (props) => {
       <div className="card w-96 bg-base-100 hover:bg-slate-200 shadow-xl pt-3">
         <div className="flex items-center justify-center">
           <figure>
-            <LazyLoad offset={300} threshold={0.95}>
+            <LazyLoad offset={300} threshold={0.75}>
               <img className="rounded-lg" src={chefImage} alt={chefName} />
             </LazyLoad>
           </figure>
